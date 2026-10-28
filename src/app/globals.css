@@ -8,6 +8,7 @@
   --color-soft: #f2f1ea;
   --color-mute: #9a9b91;
   --color-lime: #c6ff3d;
+  --color-redline: #ff5c4d;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-display-face);
@@ -72,7 +73,11 @@ body {
 }
 
 .marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee var(--marquee-duration, 90s) linear infinite;
+}
+
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,24 +1,6 @@
-import { profile, stats, skillGroups } from "@/data/content";
+import { profile, stats } from "@/data/content";
 import { CountUp, ScrollWords } from "./Interactive";
 import { Parallax, Reveal } from "./Motion";
-
-const marqueeItems = Array.from(new Set(skillGroups.flatMap((g) => g.items)));
-
-export function Marquee() {
-  const row = [...marqueeItems, ...marqueeItems];
-  return (
-    <div className="overflow-hidden border-y border-line bg-charcoal py-5" aria-hidden>
-      <div className="marquee flex w-max gap-10 whitespace-nowrap font-mono text-sm uppercase tracking-[0.2em] text-mute">
-        {[...row, ...row].map((item, i) => (
-          <span key={i} className="flex items-center gap-10">
-            {item}
-            <span className="text-lime">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function Intro() {
   return (
