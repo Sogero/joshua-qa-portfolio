@@ -1,9 +1,16 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowDownRight, Download } from "lucide-react";
 import { useRef } from "react";
 import { profile } from "@/data/content";
+import { Magnetic, PointerLayer } from "./Interactive";
+
+const floaters = [
+  { label: "TraxionPay", status: "PASS", pos: "right-[3%] top-[17%]", depth: 18 },
+  { label: "DigiCOOP", status: "PASS", pos: "right-[19%] top-[17%]", depth: -14 },
+  { label: "BIBO Super App", status: "PASS", pos: "right-[3%] top-[25%]", depth: 22 },
+];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -15,27 +22,44 @@ export function Hero() {
 
   const gridY = useTransform(scrollYProgress, [0, 1], r(0, 160));
   const glowY = useTransform(scrollYProgress, [0, 1], r(0, 260));
-  const bigY = useTransform(scrollYProgress, [0, 1], r(0, -120));
   const textY = useTransform(scrollYProgress, [0, 1], r(0, 90));
   const fade = useTransform(scrollYProgress, [0, 0.8], reduce ? [1, 1] : [1, 0]);
+
+  const mx = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
+  const my = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
+  const mouse = { x: mx, y: my };
+  function onPointerMove(e: React.PointerEvent) {
+    if (reduce || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set(((e.clientX - r.left) / r.width) * 2 - 1);
+    my.set(((e.clientY - r.top) / r.height) * 2 - 1);
+  }
 
   const words = ["I", "don't", "just", "find", "bugs."];
 
   return (
-    <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
+    <section ref={ref} onPointerMove={onPointerMove} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
       <motion.div style={{ y: gridY }} className="grid-bg absolute inset-[-10%] [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" aria-hidden />
       <motion.div
         style={{ y: glowY }}
         className="absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-lime/15 blur-[140px]"
         aria-hidden
       />
-      <motion.div
-        style={{ y: bigY }}
-        className="outline-text pointer-events-none absolute -bottom-6 left-0 select-none whitespace-nowrap font-serif text-[34vw] leading-none md:text-[24vw]"
-        aria-hidden
-      >
-        QUALITY
-      </motion.div>
+
+      {!reduce &&
+        floaters.map((f) => (
+          <PointerLayer key={f.label} mouse={mouse} depth={f.depth} className={`absolute ${f.pos} hidden xl:block`}>
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5 + Math.abs(f.depth) / 20, repeat: Infinity, ease: "easeInOut" }}
+              aria-hidden
+              className="flex items-center gap-3 border border-line bg-charcoal/80 px-4 py-2.5 font-mono text-xs backdrop-blur"
+            >
+              <span className="text-lime">● {f.status}</span>
+              <span className="text-mute">{f.label}</span>
+            </motion.div>
+          </PointerLayer>
+        ))}
 
       <motion.div style={{ y: textY, opacity: fade }} className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
         <motion.p
@@ -51,11 +75,11 @@ export function Hero() {
           {profile.status}
         </motion.p>
 
-        <h1 className="font-serif text-[clamp(3.4rem,11vw,9.5rem)] leading-[0.92] tracking-tight">
+        <h1 className="font-display text-[clamp(3.4rem,11vw,9.5rem)] leading-[0.92] tracking-tight">
           <span className="sr-only">{profile.tagline}</span>
           <span aria-hidden>
             {words.map((w, i) => (
-              <span key={w} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
+              <span key={w} className="mr-[0.22em] -mb-[0.2em] inline-block overflow-hidden pb-[0.2em] align-bottom">
                 <motion.span
                   className={`inline-block ${i === 4 ? "italic text-lime" : ""}`}
                   initial={{ y: "110%" }}
@@ -83,6 +107,7 @@ export function Hero() {
             <p className="mt-1 font-mono text-xs text-mute">{profile.location}</p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
+            <Magnetic>
             <a
               href="#projects"
               className="group inline-flex items-center gap-2 bg-lime px-6 py-3.5 font-mono text-sm uppercase tracking-wider text-ink transition-transform hover:-translate-y-0.5"
@@ -90,6 +115,8 @@ export function Hero() {
               View work
               <ArrowDownRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" aria-hidden />
             </a>
+            </Magnetic>
+            <Magnetic>
             <a
               href={profile.resume}
               download={profile.resumeName}
@@ -97,6 +124,7 @@ export function Hero() {
             >
               <Download size={16} aria-hidden /> Résumé
             </a>
+            </Magnetic>
           </div>
         </motion.div>
       </motion.div>

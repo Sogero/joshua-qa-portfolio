@@ -12,7 +12,7 @@ export const profile = {
   tagline: "I don't just find bugs.",
   headline: "I help prevent defects from ever reaching your users.",
   summary:
-    "Software QA Engineer with over 3 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
+    "Software QA Engineer with over 4 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
 };
 
 export const nav = [
@@ -25,8 +25,8 @@ export const nav = [
 ];
 
 export const stats = [
-  { value: "3+", label: "Years in QA" },
-  { value: "9", label: "Projects tested" },
+  { value: "4+", label: "Years in QA" },
+  { value: "10+", label: "Projects tested" },
   { value: "2", label: "Companies" },
   { value: "2", label: "Awards" },
 ];
@@ -35,12 +35,12 @@ export const skillGroups = [
   {
     title: "Automation",
     index: "01",
-    items: ["Robot Framework", "Selenium WebDriver", "Java", "Regression testing"],
+    items: ["Robot Framework", "Selenium WebDriver", "Java", "JavaScript", "TypeScript", "Playwright", "Regression testing"],
   },
   {
     title: "Manual testing",
     index: "02",
-    items: ["Test planning", "Defect reporting", "SIT & UAT", "Mobile & web testing"],
+    items: ["Test planning", "Defect reporting", "SIT & UAT", "Mobile & web testing", "API testing", "Cross-platform testing", "Agile / Scrum"],
   },
   {
     title: "Tools & platforms",
@@ -214,6 +214,6 @@ export const awards = [
 ];
 
 export const aboutParagraphs = [
-  "I'm Joshua Mendoza, a Software QA Engineer based in Rizal, Philippines, with over 3 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
+  "I'm Joshua Mendoza, a Software QA Engineer based in Rizal, Philippines, with over 4 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
   "I started in UAT at Stratpoint Technologies, writing test cases from requirements and tracking defects. At TraxionTech I've grown into automation with Robot Framework, regression and end-to-end testing, and mentoring junior testers.",
 ];

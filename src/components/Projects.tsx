@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { categories, projects, type Category, type Project } from "@/data/content";
+import { Tilt } from "./Interactive";
 import { SectionHeading } from "./Motion";
 
 function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
@@ -31,7 +32,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-lime">
                 Project {project.index} · Status: Pass
               </p>
-              <h3 id="project-dialog-title" className="mt-3 font-serif text-5xl">
+              <h3 id="project-dialog-title" className="mt-3 font-display text-5xl">
                 {project.name}
               </h3>
             </div>
@@ -114,6 +115,7 @@ export function Projects() {
                 transition={{ duration: 0.35 }}
                 className="bg-charcoal"
               >
+                <Tilt className="h-full" max={6}>
                 <button
                   type="button"
                   onClick={() => setSelected(p)}
@@ -125,7 +127,7 @@ export function Projects() {
                       <span className="text-mute">{p.index}</span>
                       <span className="border border-lime/40 px-2 py-0.5 text-lime">PASS</span>
                     </div>
-                    <h3 className="mt-8 font-serif text-4xl transition-colors group-hover:text-lime">{p.name}</h3>
+                    <h3 className="mt-8 font-display text-4xl transition-colors group-hover:text-lime">{p.name}</h3>
                     <p className="mt-3 text-mute">{p.summary}</p>
                   </div>
                   <div className="mt-8 flex items-end justify-between gap-4">
@@ -137,6 +139,7 @@ export function Projects() {
                     <ArrowUpRight className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-lime" aria-hidden />
                   </div>
                 </button>
+                </Tilt>
               </motion.li>
             ))}
           </AnimatePresence>

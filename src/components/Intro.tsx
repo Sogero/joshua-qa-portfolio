@@ -1,4 +1,5 @@
 import { profile, stats, skillGroups } from "@/data/content";
+import { CountUp, ScrollWords } from "./Interactive";
 import { Parallax, Reveal } from "./Motion";
 
 const marqueeItems = Array.from(new Set(skillGroups.flatMap((g) => g.items)));
@@ -32,16 +33,15 @@ export function Intro() {
         </div>
         <div className="md:col-span-8">
           <Reveal>
-            <h2 id="intro-title" className="font-serif text-4xl leading-[1.12] md:text-6xl">
-              Over <em className="text-lime">3 years</em> ensuring release quality across fintech, enterprise, and mobile
+            <h2 id="intro-title" className="font-display text-4xl leading-[1.12] md:text-6xl">
+              Over <em className="text-lime">4 years</em> ensuring release quality across fintech, enterprise, and mobile
               platforms.
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-mute">
-              {profile.summary} I aim to prevent defects from reaching users — not just find them.
-            </p>
-          </Reveal>
+          <ScrollWords
+            className="mt-10 max-w-3xl font-display text-3xl leading-snug md:text-4xl"
+            text={`${profile.summary} I aim to prevent defects from reaching users, not just find them.`}
+          />
         </div>
       </div>
 
@@ -49,7 +49,9 @@ export function Intro() {
         <dl className="grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="bg-ink p-6 md:p-8">
-              <dd className="font-serif text-6xl text-lime md:text-7xl">{s.value}</dd>
+              <dd className="font-display text-6xl text-lime md:text-7xl">
+                <CountUp to={parseInt(s.value)} suffix={s.value.includes("+") ? "+" : ""} />
+              </dd>
               <dt className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-mute">{s.label}</dt>
             </div>
           ))}

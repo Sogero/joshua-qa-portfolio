@@ -27,7 +27,7 @@ export function Experience() {
             <span className="absolute -left-[2.45rem] top-2 h-3 w-3 bg-lime md:-left-[4.45rem]" aria-hidden />
             <Reveal>
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-lime">{job.period}</p>
-              <h3 className="mt-3 font-serif text-4xl md:text-6xl">{job.company}</h3>
+              <h3 className="mt-3 font-display text-4xl md:text-6xl">{job.company}</h3>
               <p className="mt-1 text-lg text-mute">{job.role}</p>
             </Reveal>
             <Reveal delay={0.1}>

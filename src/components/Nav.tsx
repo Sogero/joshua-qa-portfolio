@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { nav, profile } from "@/data/content";
+import { Logo } from "./Logo";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -49,8 +50,8 @@ export function Nav() {
       }`}
     >
       <nav aria-label="Primary" className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-10">
-        <a href="#top" className="flex items-center gap-2 font-mono text-sm tracking-tight" aria-label="Joshua Mendoza — back to top">
-          <span className="grid h-7 w-7 place-items-center bg-lime font-bold text-ink">JM</span>
+        <a href="#top" className="group/logo flex items-center gap-2.5 font-mono text-sm tracking-tight" aria-label="Joshua Mendoza — back to top">
+          <Logo size={30} className="shrink-0 transition-transform duration-300 group-hover/logo:rotate-90" />
           <span className="hidden sm:inline">joshua.mendoza</span>
         </a>
 
@@ -112,7 +113,7 @@ export function Nav() {
                   <a
                     href={`#${item.id}`}
                     onClick={() => setOpen(false)}
-                    className="flex items-baseline gap-4 border-b border-line py-4 font-serif text-4xl"
+                    className="flex items-baseline gap-4 border-b border-line py-4 font-display text-4xl"
                   >
                     <span className="font-mono text-xs text-lime">0{i + 1}</span>
                     {item.label}

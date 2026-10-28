@@ -3,10 +3,13 @@
 import { ArrowUpRight, Check, Copy, Download, Link2, Mail, Phone } from "lucide-react";
 import { useState } from "react";
 import { profile } from "@/data/content";
+import { ContactDialog } from "./ContactForm";
+import { Magnetic } from "./Interactive";
 import { Reveal, SectionHeading } from "./Motion";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
 
   async function copyEmail() {
     try {
@@ -33,12 +36,16 @@ export function Contact() {
             Open to QA engineering opportunities. Reach out by email, phone, or LinkedIn — or grab my résumé.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={`mailto:${profile.email}`}
+            <Magnetic>
+            <button
+              type="button"
+              onClick={() => setFormOpen(true)}
+              aria-haspopup="dialog"
               className="inline-flex items-center gap-2 bg-lime px-6 py-3.5 font-mono text-sm uppercase tracking-wider text-ink transition-transform hover:-translate-y-0.5"
             >
               <Mail size={16} aria-hidden /> Send email
-            </a>
+            </button>
+            </Magnetic>
             <button
               type="button"
               onClick={copyEmail}
@@ -77,6 +84,7 @@ export function Contact() {
           </ul>
         </Reveal>
       </div>
+      <ContactDialog open={formOpen} onClose={() => setFormOpen(false)} />
     </section>
   );
 }

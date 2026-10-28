@@ -81,7 +81,7 @@ export function SectionHeading({
         </p>
       </Reveal>
       <Reveal delay={0.08}>
-        <h2 id={id} className="max-w-4xl font-serif text-5xl leading-[1.02] md:text-7xl">
+        <h2 id={id} className="max-w-4xl font-display text-5xl leading-[1.02] md:text-7xl">
           {title} {accent && <em className="text-lime">{accent}</em>}
         </h2>
       </Reveal>

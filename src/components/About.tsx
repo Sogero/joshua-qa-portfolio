@@ -23,17 +23,17 @@ export function About() {
               <dl className="mt-6 space-y-5">
                 <div>
                   <dt className="font-mono text-xs uppercase text-mute">Role</dt>
-                  <dd className="font-serif text-2xl">{profile.role}</dd>
+                  <dd className="font-display text-2xl">{profile.role}</dd>
                 </div>
                 <div>
                   <dt className="font-mono text-xs uppercase text-mute">Based in</dt>
-                  <dd className="flex items-center gap-2 font-serif text-2xl">
+                  <dd className="flex items-center gap-2 font-display text-2xl">
                     <MapPin size={18} className="text-lime" aria-hidden /> {profile.location}
                   </dd>
                 </div>
                 <div>
                   <dt className="font-mono text-xs uppercase text-mute">Focus</dt>
-                  <dd className="font-serif text-2xl">Fintech, enterprise &amp; mobile QA</dd>
+                  <dd className="font-display text-2xl">Fintech, enterprise &amp; mobile QA</dd>
                 </div>
               </dl>
             </div>
