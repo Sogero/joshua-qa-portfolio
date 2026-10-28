@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
+import { Caveat, Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import { MotionConfig } from "@/components/Motion";
 import { profile } from "@/data/content";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const hand = Caveat({ variable: "--font-hand-face", subsets: ["latin"], weight: ["500", "600"] });
 const display = Inter_Tight({
   variable: "--font-display-face",
   subsets: ["latin"],
@@ -69,7 +70,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${display.variable} antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${display.variable} ${hand.variable} antialiased`}>
       <body className="grain min-h-screen">
         <a
           href="#main"

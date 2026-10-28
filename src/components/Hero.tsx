@@ -86,18 +86,30 @@ export function Hero() {
                           <svg
                             viewBox="0 0 100 40"
                             preserveAspectRatio="none"
-                            className="pointer-events-none absolute -inset-x-[4%] top-[34%] h-[34%] w-[108%] overflow-visible"
+                            className="pointer-events-none absolute left-0 top-[30%] h-[40%] w-[88%] overflow-visible"
                           >
                             <motion.path
-                              d="M1 24 C 14 10, 26 33, 40 19 S 66 12, 78 22 S 92 14, 99 17"
+                              d="M2 20 C 22 15, 42 23, 64 17 S 90 18, 98 13"
                               fill="none"
                               stroke="var(--color-redline)"
-                              strokeWidth="5"
+                              strokeWidth="4"
                               strokeLinecap="round"
                               vectorEffect="non-scaling-stroke"
                               initial={{ pathLength: reduce ? 1 : 0 }}
                               animate={{ pathLength: 1 }}
-                              transition={{ duration: 0.7, delay: 1.25, ease: "easeOut" }}
+                              transition={{ duration: 0.45, delay: 1.25, ease: "easeOut" }}
+                            />
+                            <motion.path
+                              d="M94 28 C 72 31, 48 25, 14 30"
+                              fill="none"
+                              stroke="var(--color-redline)"
+                              strokeOpacity="0.85"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              vectorEffect="non-scaling-stroke"
+                              initial={{ pathLength: reduce ? 1 : 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 0.4, delay: 1.6, ease: "easeOut" }}
                             />
                           </svg>
                         )}
@@ -107,14 +119,37 @@ export function Hero() {
                 })}
               </span>
             </h1>
-            <motion.p
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: reduce ? 0 : 1.8, ease }}
-              className="mt-4 -rotate-2 font-mono text-sm text-redline md:text-base"
-            >
-              ↳ I prevent them.
-            </motion.p>
+            <div className="mt-2 flex -rotate-3 items-start gap-1 pl-1 text-redline">
+              <svg viewBox="0 0 48 44" className="h-9 w-10 shrink-0 md:h-11 md:w-12" fill="none" aria-hidden>
+                <motion.path
+                  d="M42 36 C 20 40, 6 30, 11 9"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: reduce ? 1 : 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.5, delay: 1.95, ease: "easeOut" }}
+                />
+                <motion.path
+                  d="M3 17 L11 7 L19 15"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  initial={{ pathLength: reduce ? 1 : 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.25, delay: 2.4, ease: "easeOut" }}
+                />
+              </svg>
+              <motion.p
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: reduce ? 0 : 2.1, ease }}
+                className="mt-3 font-hand text-2xl leading-none md:text-3xl"
+              >
+                I prevent them.
+              </motion.p>
+            </div>
           </div>
 
           <motion.div

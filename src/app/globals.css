@@ -8,10 +8,11 @@
   --color-soft: #f2f1ea;
   --color-mute: #9a9b91;
   --color-lime: #c6ff3d;
-  --color-redline: #ff5c4d;
+  --color-redline: #ff6f5e;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-display-face);
+  --font-hand: var(--font-hand-face);
 }
 
 html {
