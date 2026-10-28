@@ -4,13 +4,8 @@ import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTran
 import { ArrowDownRight, Download } from "lucide-react";
 import { useRef } from "react";
 import { profile } from "@/data/content";
+import { HeroTerminal } from "./HeroTerminal";
 import { Magnetic, PointerLayer } from "./Interactive";
-
-const floaters = [
-  { label: "TraxionPay", status: "PASS", pos: "right-[3%] top-[17%]", depth: 18 },
-  { label: "DigiCOOP", status: "PASS", pos: "right-[19%] top-[17%]", depth: -14 },
-  { label: "BIBO Super App", status: "PASS", pos: "right-[3%] top-[25%]", depth: 22 },
-];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -46,21 +41,6 @@ export function Hero() {
         aria-hidden
       />
 
-      {!reduce &&
-        floaters.map((f) => (
-          <PointerLayer key={f.label} mouse={mouse} depth={f.depth} className={`absolute ${f.pos} hidden xl:block`}>
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5 + Math.abs(f.depth) / 20, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden
-              className="flex items-center gap-3 border border-line bg-charcoal/80 px-4 py-2.5 font-mono text-xs backdrop-blur"
-            >
-              <span className="text-lime">● {f.status}</span>
-              <span className="text-mute">{f.label}</span>
-            </motion.div>
-          </PointerLayer>
-        ))}
-
       <motion.div style={{ y: textY, opacity: fade }} className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -75,7 +55,8 @@ export function Hero() {
           {profile.status}
         </motion.p>
 
-        <h1 className="font-display text-[clamp(3.4rem,11vw,9.5rem)] leading-[0.92] tracking-tight">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-center lg:gap-14">
+        <h1 className="font-display text-[clamp(3.4rem,11vw,9.5rem)] leading-[0.92] tracking-tight lg:text-[clamp(3.2rem,6.2vw,7.5rem)]">
           <span className="sr-only">{profile.tagline}</span>
           <span aria-hidden>
             {words.map((w, i) => (
@@ -92,6 +73,18 @@ export function Hero() {
             ))}
           </span>
         </h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.5, ease }}
+          className="hidden lg:block"
+        >
+          <PointerLayer mouse={mouse} depth={10}>
+            <HeroTerminal />
+          </PointerLayer>
+        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
