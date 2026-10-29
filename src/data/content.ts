@@ -24,13 +24,6 @@ export const nav = [
   { id: "contact", label: "Contact" },
 ];
 
-export const stats = [
-  { value: "4+", label: "Years in QA" },
-  { value: "10+", label: "Projects tested" },
-  { value: "2", label: "Companies" },
-  { value: "2", label: "Awards" },
-];
-
 export const skillGroups = [
   {
     title: "Automation",
@@ -40,7 +33,7 @@ export const skillGroups = [
   {
     title: "Manual testing",
     index: "02",
-    items: ["Test planning", "Defect reporting", "SIT & UAT", "Mobile & web testing", "API testing", "Cross-platform testing", "Agile / Scrum"],
+    items: ["Test planning", "Defect reporting", "SIT & UAT", "Mobile & web testing", "API testing", "Cross-platform testing"],
   },
   {
     title: "Tools & platforms",
@@ -56,16 +49,16 @@ export const experience = [
     period: "Mar 2024 — Present",
     points: [
       "Designed and executed 100+ test cases per release for web and mobile applications.",
-      "Built and maintained Robot Framework automation scripts.",
-      "Performed regression and end-to-end testing.",
+      "Built and maintained automation with Playwright and TypeScript, alongside Robot Framework.",
+      "Designed end-to-end and regression tests for digital banking platforms.",
       "Worked with developers and stakeholders in Agile sprints.",
       "Mentored junior testers and helped improve QA processes.",
     ],
-    badges: ["Rising Star · 2025", "Innovation Award · 2026"],
+    badges: ["Rising Star – Outstanding Newcomer · 2025", "Innovation and Improvement Award · 2026"],
   },
   {
     company: "Stratpoint Technologies",
-    role: "Apple UAT Tester",
+    role: "Software QA Engineer (UAT)",
     period: "Jun 2022 — Oct 2023",
     points: [
       "Executed functional and user acceptance testing.",
@@ -90,11 +83,15 @@ export type Project = {
   tags: string[];
   focus: string[];
   featuredCase?: boolean;
+  company?: string;
+  role?: string;
 };
 
 export const projects: Project[] = [
   {
     slug: "traxionpay",
+    company: "TraxionTech",
+    role: "Automated the end-to-end payment gateway flows and brought down regression cycle time.",
     name: "TraxionPay",
     index: "01",
     summary: "End-to-end automation for payment gateway flows.",
@@ -106,6 +103,8 @@ export const projects: Project[] = [
   },
   {
     slug: "digicoop",
+    company: "TraxionTech",
+    role: "Delivered full regression and functional coverage for the platform ahead of launch.",
     name: "DigiCOOP",
     index: "02",
     summary: "Full regression and functional coverage for a cooperative digital banking platform.",
@@ -117,6 +116,8 @@ export const projects: Project[] = [
   },
   {
     slug: "micropay",
+    company: "TraxionTech",
+    role: "Validated micro-transaction flows and API integrations, using Postman for API checks.",
     name: "MicroPay",
     index: "03",
     summary: "Validated micro-transaction flows and API integrations.",
@@ -128,6 +129,8 @@ export const projects: Project[] = [
   },
   {
     slug: "bibo-super-app",
+    company: "TraxionTech",
+    role: "Ran cross-platform mobile testing and set up the structured UAT process.",
     name: "BIBO Super App",
     index: "04",
     summary: "Cross-platform mobile testing for a multi-service app.",
@@ -189,6 +192,13 @@ export const projects: Project[] = [
   },
 ];
 
+export const stats = [
+  { value: "4+", label: "Years in QA" },
+  { value: String(projects.length), label: "Projects tested" },
+  { value: "2", label: "Companies" },
+  { value: "2", label: "Awards" },
+];
+
 export const philosophy = [
   {
     title: "Prevent, don't just detect",
@@ -209,11 +219,11 @@ export const philosophy = [
 ];
 
 export const awards = [
-  { year: "2026", title: "Innovation Award", org: "TraxionTech" },
-  { year: "2025", title: "Rising Star", org: "TraxionTech" },
+  { year: "2026", title: "Innovation and Improvement Award", org: "TraxionTech" },
+  { year: "2025", title: "Rising Star – Outstanding Newcomer", org: "TraxionTech" },
 ];
 
 export const aboutParagraphs = [
   "I'm Joshua Mendoza, a Software QA Engineer based in Rizal, Philippines, with over 4 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
-  "I started in UAT at Stratpoint Technologies, writing test cases from requirements and tracking defects. At TraxionTech I've grown into automation with Robot Framework, regression and end-to-end testing, and mentoring junior testers.",
+  "I started in UAT at Stratpoint Technologies, writing test cases from requirements and tracking defects. At TraxionTech I've grown into automation, writing end-to-end and regression tests with Playwright and TypeScript alongside Robot Framework, and mentoring junior testers.",
 ];

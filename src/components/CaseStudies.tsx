@@ -61,7 +61,16 @@ export function CaseStudies() {
               <Reveal>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-lime">Case {c.index}</p>
                 <h3 className="mt-3 font-display text-5xl md:text-7xl">{c.name}</h3>
+                <p className="mt-4 font-mono text-xs uppercase tracking-wider text-mute">
+                  {c.company} · {c.categories.join(" / ")}
+                </p>
                 <p className="mt-5 max-w-lg text-lg text-mute">{c.summary}</p>
+                {c.role && (
+                  <>
+                    <h4 className="mt-8 font-mono text-xs uppercase tracking-[0.2em] text-mute">What I did</h4>
+                    <p className="mt-3 max-w-lg text-lg">{c.role}</p>
+                  </>
+                )}
                 <h4 className="mt-8 font-mono text-xs uppercase tracking-[0.2em] text-mute">Outcome</h4>
                 <p className="mt-3 max-w-lg border-l-2 border-lime pl-4 font-display text-2xl leading-snug md:text-3xl">
                   {c.outcome}
