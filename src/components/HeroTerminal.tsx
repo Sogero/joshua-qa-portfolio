@@ -37,12 +37,12 @@ export function HeroTerminal() {
   return (
     <div aria-hidden className="w-full overflow-hidden border border-line bg-charcoal/85 shadow-2xl shadow-black/40 backdrop-blur">
       <div className="border-b border-line px-5 py-3">
-        <span className="font-mono text-xs text-mute">robot — regression suite</span>
+        <span className="font-mono text-xs text-mute">playwright — regression suite</span>
       </div>
 
       <div className="space-y-3 px-5 py-5 font-mono text-[13px] leading-none">
         <p className={`text-soft transition-opacity duration-300 ${show(1)}`}>
-          <span className="text-lime">$</span> robot --suite regression
+          <span className="text-lime">$</span> npx playwright test
         </p>
 
         <ul className="space-y-3.5 pt-1">

@@ -6,16 +6,16 @@ import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const hand = Caveat({ variable: "--font-hand-face", subsets: ["latin"], weight: ["500", "600"] });
+const hand = Caveat({ variable: "--font-hand-face", subsets: ["latin"], weight: ["500"] });
 const display = Inter_Tight({
   variable: "--font-display-face",
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["500"],
   style: ["normal", "italic"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://joshua-qa-portfolio.vercel.app";
-const description = `${profile.summary} Test automation with Robot Framework and Selenium, fintech QA, and a prevention-first quality mindset.`;
+const description = `${profile.summary} Test automation with Playwright and TypeScript, plus Robot Framework and Selenium, in fintech QA with a prevention-first quality mindset.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,6 +28,8 @@ export const metadata: Metadata = {
     "Software QA Engineer",
     "QA Engineer Philippines",
     "Test Automation",
+    "Playwright",
+    "TypeScript",
     "Robot Framework",
     "Selenium",
     "Fintech QA",

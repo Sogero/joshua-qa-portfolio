@@ -1,8 +1,9 @@
 "use client";
 
 import {
+  LazyMotion,
   MotionConfig as BaseMotionConfig,
-  motion,
+  m,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -10,7 +11,11 @@ import {
 import { useRef, type ReactNode } from "react";
 
 export function MotionConfig({ children }: { children: ReactNode }) {
-  return <BaseMotionConfig reducedMotion="user">{children}</BaseMotionConfig>;
+  return (
+    <LazyMotion features={() => import("./motionFeatures").then((mod) => mod.default)} strict>
+      <BaseMotionConfig reducedMotion="user">{children}</BaseMotionConfig>
+    </LazyMotion>
+  );
 }
 
 export function Reveal({
@@ -26,7 +31,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li" | "article" | "p" | "h2" | "h3";
 }) {
-  const Tag = motion[as] as typeof motion.div;
+  const Tag = m[as] as typeof m.div;
   return (
     <Tag
       className={className}
@@ -56,7 +61,7 @@ export function Parallax({
   const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-speed, speed]);
   return (
     <div ref={ref} className={className}>
-      <motion.div style={{ y }}>{children}</motion.div>
+      <m.div style={{ y }}>{children}</m.div>
     </div>
   );
 }

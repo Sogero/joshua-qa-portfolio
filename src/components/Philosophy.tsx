@@ -9,7 +9,7 @@ export function Philosophy() {
         <SectionHeading id="phil-title" eyebrow="06 — QA philosophy" title="Prevent first." accent="Detect second." />
         <div className="grid gap-px border border-line bg-line md:grid-cols-2">
           {philosophy.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 2) * 0.1} className="bg-ink/90 p-8 backdrop-blur md:p-10">
+            <Reveal key={p.title} delay={(i % 2) * 0.1} className="bg-ink/90 p-8 md:p-10">
               <p className="font-mono text-xs text-lime">0{i + 1}</p>
               <h3 className="mt-3 font-display text-3xl md:text-4xl">{p.title}</h3>
               <p className="mt-4 text-mute">{p.body}</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { categories, projects, type Category, type Project } from "@/data/content";
@@ -103,12 +103,11 @@ export function Projects() {
           Showing {visible.length} projects
         </p>
 
-        <motion.ul layout className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <m.ul className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {visible.map((p) => (
-              <motion.li
+              <m.li
                 key={p.slug}
-                layout
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
@@ -119,7 +118,6 @@ export function Projects() {
                 <button
                   type="button"
                   onClick={() => setSelected(p)}
-                  aria-label={`View details for ${p.name}`}
                   className="group flex h-full min-h-72 w-full flex-col justify-between p-7 text-left transition-colors hover:bg-panel"
                 >
                   <div>
@@ -140,10 +138,10 @@ export function Projects() {
                   </div>
                 </button>
                 </Tilt>
-              </motion.li>
+              </m.li>
             ))}
           </AnimatePresence>
-        </motion.ul>
+        </m.ul>
       </div>
       <ProjectDialog project={selected} onClose={() => setSelected(null)} />
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { m, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { Award } from "lucide-react";
 import { useRef } from "react";
 import { experience } from "@/data/content";
@@ -17,7 +17,7 @@ export function Experience() {
       <SectionHeading id="exp-title" eyebrow="03 — Professional experience" title="Where I've" accent="shipped quality." />
 
       <ol ref={ref} className="relative ml-2 border-l border-line pl-8 md:ml-0 md:pl-16">
-        <motion.span
+        <m.span
           aria-hidden
           className="absolute -left-px top-0 h-full w-px origin-top bg-lime"
           style={{ scaleY: reduce ? 1 : scaleY }}

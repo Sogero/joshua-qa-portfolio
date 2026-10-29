@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useTransform, type MotionValue } from "motion/react";
+import { m, useTransform, type MotionValue } from "motion/react";
 
 // Seeded so the server and client render identical positions (no hydration mismatch).
 function rng(seed: number) {
@@ -47,20 +47,20 @@ function Layer({
 }) {
   const y = useTransform(progress, [0, 1], reduce ? [0, 0] : [0, -layer.drift]);
   return (
-    <motion.div style={{ y }} className="absolute inset-0">
-      {layer.marks.map((m, i) => (
-        <motion.span
+    <m.div style={{ y }} className="absolute inset-0">
+      {layer.marks.map((mark, i) => (
+        <m.span
           key={i}
-          className={`absolute select-none font-mono ${layer.size} ${m.lime ? "text-lime" : layer.base}`}
-          style={{ left: m.left, top: m.top }}
-          initial={m.lime ? { opacity: 0.55 } : undefined}
-          animate={m.lime && !reduce ? { opacity: [0.25, 0.8, 0.25] } : undefined}
-          transition={m.lime ? { duration: 5, delay: m.delay, repeat: Infinity, ease: "easeInOut" } : undefined}
+          className={`absolute select-none font-mono ${layer.size} ${mark.lime ? "text-lime" : layer.base}`}
+          style={{ left: mark.left, top: mark.top }}
+          initial={mark.lime ? { opacity: 0.55 } : undefined}
+          animate={mark.lime && !reduce ? { opacity: [0.25, 0.8, 0.25] } : undefined}
+          transition={mark.lime ? { duration: 5, delay: mark.delay, repeat: Infinity, ease: "easeInOut" } : undefined}
         >
-          {m.glyph}
-        </motion.span>
+          {mark.glyph}
+        </m.span>
       ))}
-    </motion.div>
+    </m.div>
   );
 }
 

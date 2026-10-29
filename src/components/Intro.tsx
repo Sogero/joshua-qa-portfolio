@@ -1,4 +1,4 @@
-import { profile, stats } from "@/data/content";
+import { stats } from "@/data/content";
 import { CountUp, ScrollWords } from "./Interactive";
 import { Parallax, Reveal } from "./Motion";
 
@@ -16,13 +16,12 @@ export function Intro() {
         <div className="md:col-span-8">
           <Reveal>
             <h2 id="intro-title" className="font-display text-4xl leading-[1.12] md:text-6xl">
-              Over <em className="text-lime">4 years</em> ensuring release quality across fintech, enterprise, and mobile
-              platforms.
+              Peace of mind, <em className="text-lime">automated.</em>
             </h2>
           </Reveal>
           <ScrollWords
             className="mt-10 max-w-3xl font-display text-3xl leading-snug md:text-4xl"
-            text={`${profile.summary} I aim to prevent defects from reaching users, not just find them.`}
+            text={`I specialize in automated testing, so users and dev teams can trust every release. After ${stats[0].value} years in QA, I focus on fintech, on the paths where money moves. At TraxionTech I design end-to-end and regression tests with Playwright and Robot Framework, keeping our digital banking platforms dependable.`}
           />
         </div>
       </div>

@@ -2,16 +2,16 @@
 
 import {
   animate,
-  motion,
+  m,
   useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
-  type MotionValue,
+  type MotionStyle,
 } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 
 const hasFinePointer = () =>
   typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -38,10 +38,10 @@ export function CursorGlow() {
 
   if (reduce) return null;
   return (
-    <motion.div
+    <m.div
       aria-hidden
       style={{ x: sx, y: sy, opacity }}
-      className="pointer-events-none fixed left-0 top-0 z-[5] h-[500px] w-[500px] rounded-full bg-lime/[0.07] blur-3xl"
+      className="pointer-events-none fixed left-0 top-0 z-[5] h-[500px] w-[500px] bg-[radial-gradient(closest-side,rgb(198_255_61/0.09),transparent)]"
     />
   );
 }
@@ -65,9 +65,9 @@ export function Magnetic({ children, strength = 0.3 }: { children: ReactNode; st
   }
 
   return (
-    <motion.div ref={ref} onPointerMove={onMove} onPointerLeave={reset} style={{ x, y }} className="inline-block">
+    <m.div ref={ref} onPointerMove={onMove} onPointerLeave={reset} style={{ x, y }} className="inline-block">
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -93,7 +93,7 @@ export function Tilt({ children, className, max = 8 }: { children: ReactNode; cl
 
   return (
     <div style={{ perspective: 900 }} className={className}>
-      <motion.div
+      <m.div
         onPointerMove={onMove}
         onPointerLeave={reset}
         style={reduce ? undefined : { rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
@@ -101,9 +101,9 @@ export function Tilt({ children, className, max = 8 }: { children: ReactNode; cl
       >
         {children}
         {!reduce && (
-          <motion.div aria-hidden style={{ background: glare }} className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [div:hover>&]:opacity-100" />
+          <m.div aria-hidden style={{ background: glare }} className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [div:hover>&]:opacity-100" />
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -129,16 +129,11 @@ export function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   );
 }
 
-function Word({ word, range, progress }: { word: string; range: [number, number]; progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, range, [0.18, 1]);
-  return (
-    <span className="mr-[0.25em] inline-block">
-      <motion.span style={{ opacity }}>{word}</motion.span>
-    </span>
-  );
-}
-
-/** Text whose words light up one by one as it scrolls through the viewport. */
+/**
+ * Text whose words light up one by one as it scrolls through the viewport.
+ * One scroll value drives a CSS variable; each word computes its own opacity in CSS,
+ * so there is no per-word JavaScript. Unlit words stay at 40% so they remain readable.
+ */
 export function ScrollWords({ text, className }: { text: string; className?: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
@@ -147,31 +142,25 @@ export function ScrollWords({ text, className }: { text: string; className?: str
 
   if (reduce) return <p className={className}>{text}</p>;
   return (
-    <p ref={ref} className={className} aria-label={text}>
+    <m.p
+      ref={ref}
+      className={className}
+      style={{ "--p": scrollYProgress, "--n": words.length } as MotionStyle}
+    >
       {words.map((w, i) => (
-        <Word key={i} word={w} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} />
+        <Fragment key={i}>
+          {i > 0 && " "}
+          <span
+            className="inline-block"
+            style={{
+              ["--i" as string]: i,
+              opacity: "calc(0.4 + 0.6 * clamp(0, calc(var(--p) * var(--n) - var(--i)), 1))",
+            }}
+          >
+            {w}
+          </span>
+        </Fragment>
       ))}
-    </p>
-  );
-}
-
-/** Wraps layers so they drift with the pointer; each layer sets its own `depth`. */
-export function PointerLayer({
-  children,
-  depth = 20,
-  className,
-  mouse,
-}: {
-  children: ReactNode;
-  depth?: number;
-  className?: string;
-  mouse: { x: MotionValue<number>; y: MotionValue<number> };
-}) {
-  const x = useTransform(mouse.x, [-1, 1], [-depth, depth]);
-  const y = useTransform(mouse.y, [-1, 1], [-depth, depth]);
-  return (
-    <motion.div style={{ x, y }} className={className}>
-      {children}
-    </motion.div>
+    </m.p>
   );
 }

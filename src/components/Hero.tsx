@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDownRight, Download } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { profile } from "@/data/content";
@@ -52,19 +52,14 @@ export function Hero() {
     <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
       <HeroBackdrop progress={scrollYProgress} reduce={!!reduce} />
 
-      <motion.div style={{ y: textY, opacity: fade }} className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease }}
-          className="mb-10 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs uppercase tracking-[0.18em] text-mute"
-        >
+      <m.div style={{ y: textY, opacity: fade }} className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
+        <p className="fadein mb-10 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs uppercase tracking-[0.18em] text-mute">
           <span>({profile.status})</span>
           <span className="hidden h-px w-8 bg-lime/60 sm:block" aria-hidden />
           <span>
             Rizal, PH · <span className="text-soft"><ManilaClock /></span> PHT
           </span>
-        </motion.p>
+        </p>
 
         <div className="lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
           <div>
@@ -75,11 +70,9 @@ export function Hero() {
                   const last = i === words.length - 1;
                   return (
                     <span key={w} className="mr-[0.22em] -mb-[0.2em] inline-block overflow-hidden pb-[0.2em] align-bottom">
-                      <motion.span
-                        className={`relative inline-block ${last ? "italic text-lime" : ""}`}
-                        initial={{ y: "110%" }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.9, delay: 0.15 + i * 0.08, ease }}
+                      <span
+                        className={`rise relative inline-block ${last ? "italic text-lime" : ""}`}
+                        style={{ animationDelay: `${0.15 + i * 0.08}s` }}
                       >
                         {w}
                         {last && (
@@ -88,7 +81,7 @@ export function Hero() {
                             preserveAspectRatio="none"
                             className="pointer-events-none absolute left-0 top-[30%] h-[40%] w-[88%] overflow-visible"
                           >
-                            <motion.path
+                            <m.path
                               d="M2 20 C 22 15, 42 23, 64 17 S 90 18, 98 13"
                               fill="none"
                               stroke="var(--color-redline)"
@@ -99,7 +92,7 @@ export function Hero() {
                               animate={{ pathLength: 1 }}
                               transition={{ duration: 0.45, delay: 1.25, ease: "easeOut" }}
                             />
-                            <motion.path
+                            <m.path
                               d="M94 28 C 72 31, 48 25, 14 30"
                               fill="none"
                               stroke="var(--color-redline)"
@@ -113,7 +106,7 @@ export function Hero() {
                             />
                           </svg>
                         )}
-                      </motion.span>
+                      </span>
                     </span>
                   );
                 })}
@@ -121,7 +114,7 @@ export function Hero() {
             </h1>
             <div className="mt-2 flex -rotate-3 items-start gap-1 pl-1 text-redline">
               <svg viewBox="0 0 48 44" className="h-9 w-10 shrink-0 md:h-11 md:w-12" fill="none" aria-hidden>
-                <motion.path
+                <m.path
                   d="M42 36 C 20 40, 6 30, 11 9"
                   stroke="currentColor"
                   strokeWidth="2.5"
@@ -130,7 +123,7 @@ export function Hero() {
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 0.5, delay: 1.95, ease: "easeOut" }}
                 />
-                <motion.path
+                <m.path
                   d="M3 17 L11 7 L19 15"
                   stroke="currentColor"
                   strokeWidth="2.5"
@@ -141,33 +134,28 @@ export function Hero() {
                   transition={{ duration: 0.25, delay: 2.4, ease: "easeOut" }}
                 />
               </svg>
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, x: -6 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: reduce ? 0 : 2.1, ease }}
                 className="mt-3 font-hand text-2xl leading-none md:text-3xl"
               >
                 I prevent them.
-              </motion.p>
+              </m.p>
             </div>
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.5, ease }}
             className="hidden lg:block"
           >
             <HeroTerminal />
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease }}
-          className="mt-12 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-end"
-        >
+        <div className="lift mt-12 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-end" style={{ animationDelay: "0.5s" }}>
           <div>
             <p className="font-mono text-sm uppercase tracking-[0.2em] text-lime">
               {profile.name} · {profile.role}
@@ -191,8 +179,8 @@ export function Hero() {
               <Download size={16} aria-hidden /> Download résumé
             </a>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </m.div>
     </section>
   );
 }

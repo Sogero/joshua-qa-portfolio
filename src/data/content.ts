@@ -35,7 +35,7 @@ export const skillGroups = [
   {
     title: "Automation",
     index: "01",
-    items: ["Robot Framework", "Selenium WebDriver", "Java", "JavaScript", "TypeScript", "Playwright", "Regression testing"],
+    items: ["Playwright", "TypeScript", "JavaScript", "Robot Framework", "Selenium WebDriver", "Java", "Regression testing"],
   },
   {
     title: "Manual testing",

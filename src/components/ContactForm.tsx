@@ -6,6 +6,38 @@ import { profile } from "@/data/content";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+// Cloudflare Turnstile is only active when a site key is configured.
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+type TurnstileApi = {
+  render: (el: HTMLElement, options: { sitekey: string; theme?: "dark" | "light" | "auto" }) => string;
+  remove: (id: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
+
+let turnstileLoading: Promise<void> | null = null;
+
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve();
+  turnstileLoading ??= new Promise<void>((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => {
+      turnstileLoading = null;
+      reject(new Error("Turnstile failed to load"));
+    };
+    document.head.appendChild(script);
+  });
+  return turnstileLoading;
+}
+
 const field =
   "w-full border border-line bg-ink px-4 py-3 text-soft placeholder:text-mute/60 focus:border-lime focus:outline-none";
 
@@ -13,6 +45,32 @@ export function ContactDialog({ open, onClose }: { open: boolean; onClose: () =>
   const ref = useRef<HTMLDialogElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const openedAt = useRef(0);
+  const sent = status === "sent";
+
+  useEffect(() => {
+    if (open) openedAt.current = Date.now();
+  }, [open]);
+
+  // Render a fresh verification widget whenever the form is shown or a submit attempt finishes
+  // (tokens are single-use).
+  useEffect(() => {
+    if (!open || sent || !TURNSTILE_SITE_KEY) return;
+    let cancelled = false;
+    let widgetId: string | undefined;
+    loadTurnstile()
+      .then(() => {
+        if (cancelled || !widgetRef.current || !window.turnstile) return;
+        widgetId = window.turnstile.render(widgetRef.current, { sitekey: TURNSTILE_SITE_KEY, theme: "dark" });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+      if (widgetId !== undefined) window.turnstile?.remove(widgetId);
+    };
+  }, [open, sent, attempt]);
 
   useEffect(() => {
     const d = ref.current;
@@ -33,7 +91,7 @@ export function ContactDialog({ open, onClose }: { open: boolean; onClose: () =>
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
+    const data = { ...Object.fromEntries(new FormData(form)), elapsedMs: Date.now() - openedAt.current };
     setStatus("sending");
     setError("");
     try {
@@ -49,6 +107,8 @@ export function ContactDialog({ open, onClose }: { open: boolean; onClose: () =>
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStatus("error");
+    } finally {
+      setAttempt((n) => n + 1);
     }
   }
 
@@ -107,6 +167,7 @@ export function ContactDialog({ open, onClose }: { open: boolean; onClose: () =>
               <span className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-mute">Message</span>
               <textarea name="message" required minLength={10} maxLength={5000} rows={5} className={`${field} resize-y`} placeholder="How can I help?" />
             </label>
+            {TURNSTILE_SITE_KEY && <div ref={widgetRef} className="min-h-[65px]" />}
             {/* Honeypot — hidden from people and assistive tech, bots fill it in. */}
             <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute left-[-9999px] h-0 w-0 opacity-0" />
 

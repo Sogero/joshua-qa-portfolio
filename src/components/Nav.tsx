@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import { AnimatePresence, m, useScroll, useSpring } from "motion/react";
 import { Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { nav, profile } from "@/data/content";
@@ -90,11 +90,11 @@ export function Nav() {
         </div>
       </nav>
 
-      <motion.div className="h-px origin-left bg-lime" style={{ scaleX: progress }} aria-hidden />
+      <m.div className="h-px origin-left bg-lime" style={{ scaleX: progress }} aria-hidden />
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "calc(100dvh - 4rem)" }}
@@ -104,7 +104,7 @@ export function Nav() {
           >
             <ul className="flex flex-col gap-1 px-5 pt-8">
               {nav.map((item, i) => (
-                <motion.li
+                <m.li
                   key={item.id}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -118,7 +118,7 @@ export function Nav() {
                     <span className="font-mono text-xs text-lime">0{i + 1}</span>
                     {item.label}
                   </a>
-                </motion.li>
+                </m.li>
               ))}
               <li className="pt-8">
                 <a
@@ -131,7 +131,7 @@ export function Nav() {
                 </a>
               </li>
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

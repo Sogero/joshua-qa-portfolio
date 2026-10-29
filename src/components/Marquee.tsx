@@ -20,13 +20,13 @@ function Mark({ path, viewBox = "0 0 24 24" }: { path: string; viewBox?: string 
 }
 
 const tools: { name: string; mark: ReactNode }[] = [
+  { name: "Playwright", mark: <Mark {...logoShapes.playwright} /> },
+  { name: "TypeScript", mark: <Mark path={siTypescript.path} /> },
+  { name: "JavaScript", mark: <Mark path={siJavascript.path} /> },
   { name: "Robot Framework", mark: <Mark path={siRobotframework.path} /> },
   { name: "Selenium", mark: <Mark path={siSelenium.path} /> },
-  { name: "Playwright", mark: <Mark {...logoShapes.playwright} /> },
-  { name: "Postman", mark: <Mark path={siPostman.path} /> },
   { name: "Java", mark: <Mark {...logoShapes.java} /> },
-  { name: "JavaScript", mark: <Mark path={siJavascript.path} /> },
-  { name: "TypeScript", mark: <Mark path={siTypescript.path} /> },
+  { name: "Postman", mark: <Mark path={siPostman.path} /> },
   { name: "Git", mark: <Mark path={siGit.path} /> },
   // SQL is a language, not a product, so it gets a generic database icon.
   { name: "SQL", mark: <Database size={22} strokeWidth={1.75} aria-hidden /> },
