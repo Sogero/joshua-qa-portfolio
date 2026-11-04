@@ -6,7 +6,7 @@ export function Philosophy() {
   return (
     <section id="philosophy" className="relative overflow-hidden border-t border-line bg-charcoal" aria-labelledby="phil-title">
       <div className="relative mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
-        <SectionHeading id="phil-title" eyebrow="06 — QA philosophy" title="Prevent first." accent="Detect second." />
+        <SectionHeading id="phil-title" eyebrow="07 — QA philosophy" title="Prevent first." accent="Detect second." />
         <div className="grid gap-px border border-line bg-line md:grid-cols-2">
           {philosophy.map((p, i) => (
             <Reveal key={p.title} delay={(i % 2) * 0.1} className="bg-ink/90 p-8 md:p-10">
@@ -24,7 +24,7 @@ export function Philosophy() {
 export function Awards() {
   return (
     <section id="awards" className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36" aria-labelledby="awards-title">
-      <SectionHeading id="awards-title" eyebrow="07 — Awards & recognition" title="Recognized at" accent="TraxionTech." />
+      <SectionHeading id="awards-title" eyebrow="08 — Awards & recognition" title="Recognized at" accent="TraxionTech." />
       <ul className="divide-y divide-line border-y border-line">
         {awards.map((a, i) => (
           <Reveal as="li" key={a.title} delay={i * 0.1} className="group flex flex-wrap items-center gap-x-10 gap-y-2 py-8 transition-colors hover:bg-panel md:px-6">

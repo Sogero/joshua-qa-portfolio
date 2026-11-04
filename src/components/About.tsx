@@ -7,7 +7,7 @@ export function About() {
     <section id="about" className="border-t border-line bg-charcoal" aria-labelledby="about-title">
       <div className="mx-auto grid max-w-7xl gap-14 px-5 py-28 md:grid-cols-12 md:px-10 md:py-36">
         <div className="md:col-span-7">
-          <SectionHeading id="about-title" eyebrow="08 — About me" title="Quality is a" accent="mindset." />
+          <SectionHeading id="about-title" eyebrow="09 — About me" title="Quality is a" accent="mindset." />
           <div className="space-y-6 text-lg leading-relaxed text-mute">
             {aboutParagraphs.map((p, i) => (
               <Reveal key={i} delay={i * 0.1}>

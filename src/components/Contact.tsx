@@ -29,7 +29,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-40" aria-labelledby="contact-title">
-      <SectionHeading id="contact-title" eyebrow="09 — Contact" title="Let's ship something" accent="reliable." />
+      <SectionHeading id="contact-title" eyebrow="10 — Contact" title="Let's ship something" accent="reliable." />
       <div className="grid gap-12 md:grid-cols-2">
         <Reveal>
           <p className="max-w-md text-lg text-mute">

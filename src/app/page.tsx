@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { Automation } from "@/components/Automation";
 import { CaseStudies } from "@/components/CaseStudies";
 import { Contact } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
@@ -25,6 +26,7 @@ export default function Home() {
         <Experience />
         <Projects />
         <CaseStudies />
+        <Automation />
         <Philosophy />
         <Awards />
         <About />

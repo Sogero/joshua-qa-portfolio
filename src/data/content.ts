@@ -20,6 +20,7 @@ export const nav = [
   { id: "toolkit", label: "Toolkit" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "automation", label: "Automation" },
   { id: "philosophy", label: "Philosophy" },
   { id: "contact", label: "Contact" },
 ];
@@ -38,7 +39,7 @@ export const skillGroups = [
   {
     title: "Tools & platforms",
     index: "03",
-    items: ["Postman", "ClickUp", "SQL", "Git", "VS Code / Eclipse", "Agile / Scrum"],
+    items: ["Postman", "SQL", "ClickUp", "Git", "VS Code / Eclipse", "Agile / Scrum"],
   },
 ];
 
@@ -226,4 +227,17 @@ export const awards = [
 export const aboutParagraphs = [
   "I'm Joshua Mendoza, a Software QA Engineer based in Rizal, Philippines, with over 4 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
   "I started in UAT at Stratpoint Technologies, writing test cases from requirements and tracking defects. At TraxionTech I've grown into automation, writing end-to-end and regression tests with Playwright and TypeScript alongside Robot Framework, and mentoring junior testers.",
+];
+
+export const automationProjects = [
+  {
+    slug: "eventhub-automation",
+    name: "EventHub Test Automation",
+    summary:
+      "An open-source test automation framework for EventHub, the practice web app from Rahul Shetty Academy, covering both the UI and the API.",
+    stack: ["Playwright", "TypeScript", "GitHub Actions"],
+    covers: ["UI tests", "API tests", "Page Object Model", "Data-driven tests", "Test reporting", "CI on GitHub Actions"],
+    // Add the GitHub URL here once the repo is published; the button appears automatically.
+    repo: "" as string,
+  },
 ];
