@@ -224,9 +224,22 @@ export const awards = [
   { year: "2025", title: "Rising Star – Outstanding Newcomer", org: "TraxionTech" },
 ];
 
+export const certifications = [
+  {
+    year: "2026",
+    title: "Playwright JS/TS Automation Testing from Scratch & Framework",
+    issuer: "Udemy · Rahul Shetty Academy",
+    detail: "28.5 hours",
+    url: "https://www.udemy.com/certificate/UC-8f32b724-eb9b-47d4-b3f2-824e715dcf57/",
+    image: "/playwright-certificate.png",
+    imageAlt: "Udemy certificate of completion for Joshua Mendoza: Playwright JS/TS Automation Testing from Scratch & Framework",
+  },
+];
+
 export const aboutParagraphs = [
   "I'm Joshua Mendoza, a Software QA Engineer based in Rizal, Philippines, with over 4 years of experience ensuring release quality across fintech, enterprise, and mobile platforms.",
   "I started in UAT at Stratpoint Technologies, writing test cases from requirements and tracking defects. At TraxionTech I've grown into automation, writing end-to-end and regression tests with Playwright and TypeScript alongside Robot Framework, and mentoring junior testers.",
+  "I keep building on that focus: in 2026 I completed Rahul Shetty Academy's Playwright JS/TS automation course on Udemy, and I practice what I learn in an open-source automation project.",
 ];
 
 export const automationProjects = [
